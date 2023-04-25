@@ -17,6 +17,6 @@ class Config(BaseSettings):
     CORS_ALLOW_CREDENTIALS: bool = True
     CORS_ALLOW_METHODS: List[str] = ['*']
     CORS_ALLOW_HEADERS: List[str] = ['*']
-
+    TEMPLATE_DIR: str = "static/template"
 
 settings = Config()
