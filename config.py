@@ -1,9 +1,12 @@
 import os.path
 from pydantic import BaseSettings
 from typing import List
+from dotenv import load_dotenv, find_dotenv
 
 
 class Config(BaseSettings):
+    # 加载环境变量
+    load_dotenv(find_dotenv(), override=True)
     # 调试模式
     APP_DEBUG: bool = True
     # 项目信息
@@ -18,5 +21,6 @@ class Config(BaseSettings):
     CORS_ALLOW_METHODS: List[str] = ['*']
     CORS_ALLOW_HEADERS: List[str] = ['*']
     TEMPLATE_DIR: str = "static/template"
+
 
 settings = Config()
