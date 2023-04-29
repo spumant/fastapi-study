@@ -1,6 +1,8 @@
 from typing import Callable
 from fastapi import FastAPI
 from database.mysql import register_mysql
+from database.redis import sys_cache
+from aioredis import Redis
 
 
 def startup(app: FastAPI) -> Callable:
@@ -13,6 +15,8 @@ def startup(app: FastAPI) -> Callable:
     async def app_start() -> None:
         # 注册数据库
         await register_mysql(app)
+        # 注入缓存到app state
+        app.state.cache = await sys_cache()
         # APP启动完成后触发
         print("启动完毕")
         pass
