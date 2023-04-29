@@ -21,6 +21,10 @@ class Config(BaseSettings):
     CORS_ALLOW_METHODS: List[str] = ['*']
     CORS_ALLOW_HEADERS: List[str] = ['*']
     TEMPLATE_DIR: str = "static/template"
+    # Session
+    SECRET_KEY = "session"
+    SESSION_COOKIE = "session_id"
+    SESSION_MAX_AGE = 14 * 24 * 60 * 60
 
 
 settings = Config()

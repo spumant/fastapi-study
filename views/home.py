@@ -1,9 +1,16 @@
-from fastapi import Request, Form
+from fastapi import Request, Form, Cookie
 from models.base import User
+from typing import Optional
 
 
-async def home(request: Request, id: str):
-    return request.app.state.views.TemplateResponse("index.html", {"request": request, "id": id})
+async def home(request: Request, session_id: Optional[str] = Cookie(None)):
+    cookie = session_id
+    session = request.session.get('session')
+    pag_data = {
+        'cookie': cookie,
+        'session': session
+    }
+    return request.app.state.views.TemplateResponse('index.html', {'request': request, **pag_data})
 
 
 async def reg_page(request: Request):

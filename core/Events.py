@@ -33,7 +33,8 @@ def stopping(app: FastAPI) -> Callable:
 
     async def stop_app() -> None:
         # APP停止时触发
-        print("停止")
-        pass
+        print("fastapi已停止")
+        cache: Redis = await app.state.cache
+        await cache.close()
 
     return stop_app
