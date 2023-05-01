@@ -1,9 +1,6 @@
-"""
-用户验证模型
-"""
-
 from pydantic import Field, BaseModel
 from typing import Optional
+from schemas.base import BaseResp
 
 
 class CreateUser(BaseModel):
@@ -12,7 +9,7 @@ class CreateUser(BaseModel):
 
 
 class AccountLogin(BaseModel):
-    username: str = Field(min_length=3, max_length=10)
+    account: str = Field(min_length=3, max_length=10)
     password: str = Field(min_length=8, max_length=12)
 
 
@@ -28,3 +25,16 @@ class UserInfo(BaseModel):
     user_status: bool
     header_img: Optional[str]
     sex: int
+
+
+class CurrentUser(BaseResp):
+    data: UserInfo
+
+
+class AccessToken(BaseModel):
+    token: Optional[str]
+    expires_in: Optional[int]
+
+
+class UserLogin(BaseResp):
+    data: AccessToken
