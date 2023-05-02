@@ -1,3 +1,8 @@
+# -*- coding:utf-8 -*-
+"""
+@Des: 异常处理
+"""
+
 from fastapi import HTTPException, Request, status
 from fastapi.responses import JSONResponse
 from typing import Union
@@ -8,12 +13,12 @@ from tortoise.exceptions import OperationalError, DoesNotExist
 
 async def mysql_does_not_exist(_: Request, exc: DoesNotExist):
     """
-    MySQL查询对象不存在异常处理
+    mysql 查询对象不存在异常处理
     :param _:
     :param exc:
     :return:
     """
-    print("DoseNotExist", exc)
+    print("DoesNotExist", exc)
     return JSONResponse({
         "code": -1,
         "message": "发出的请求针对的是不存在的记录，服务器没有进行操作。",
@@ -23,7 +28,7 @@ async def mysql_does_not_exist(_: Request, exc: DoesNotExist):
 
 async def mysql_operational_error(_: Request, exc: OperationalError):
     """
-    MySQL数据库异常错误处理
+    mysql 数据库异常错误处理
     :param _:
     :param exc:
     :return:
@@ -82,7 +87,7 @@ async def unicorn_exception_handler(_: Request, exc: UnicornException):
     })
 
 
-async def http422_error_handler(_: Request, exc: Union[RequestValidationError, ValidationError], ) -> JSONResponse:
+async def http422_error_handler(_: Request, exc: Union[RequestValidationError, ValidationError],) -> JSONResponse:
     """
     参数校验错误处理
     :param _:

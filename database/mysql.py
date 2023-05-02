@@ -1,10 +1,12 @@
+# -*- coding:utf-8 -*-
 """
-mysql数据库
+@Des: mysql数据库
 """
 
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 import os
+
 
 # -----------------------数据库配置-----------------------------------
 DB_ORM_CONFIG = {
@@ -14,7 +16,7 @@ DB_ORM_CONFIG = {
             "credentials": {
                 'host': os.getenv('BASE_HOST', '127.0.0.1'),
                 'user': os.getenv('BASE_USER', 'root'),
-                'password': os.getenv('BASE_PASSWORD', 'monarch99'),
+                'password': os.getenv('BASE_PASSWORD', '123456'),
                 'port': int(os.getenv('BASE_PORT', 3306)),
                 'database': os.getenv('BASE_DB', 'base'),
             }

@@ -1,7 +1,12 @@
-import os.path
+# -*- coding:utf-8 -*-
+"""
+@Des: 基本配置文件
+"""
+
+import os
+from dotenv import load_dotenv, find_dotenv
 from pydantic import BaseSettings
 from typing import List
-from dotenv import load_dotenv, find_dotenv
 
 
 class Config(BaseSettings):
@@ -17,10 +22,10 @@ class Config(BaseSettings):
     STATIC_DIR: str = os.path.join(os.getcwd(), "static")
     TEMPLATE_DIR: str = os.path.join(STATIC_DIR, "templates")
     # 跨域请求
-    CORS_ORIGINS: List[str] = ['*']
+    CORS_ORIGINS: List = ["*"]
     CORS_ALLOW_CREDENTIALS: bool = True
-    CORS_ALLOW_METHODS: List[str] = ['*']
-    CORS_ALLOW_HEADERS: List[str] = ['*']
+    CORS_ALLOW_METHODS: List = ["*"]
+    CORS_ALLOW_HEADERS: List = ["*"]
     # Session
     SECRET_KEY = "session"
     SESSION_COOKIE = "session_id"

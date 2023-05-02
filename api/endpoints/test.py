@@ -1,3 +1,7 @@
+# -*- coding:utf-8 -*-
+"""
+@Des: 测试
+"""
 from core.Auth import create_access_token
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from fastapi import Depends, HTTPException

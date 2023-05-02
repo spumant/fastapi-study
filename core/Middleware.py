@@ -1,3 +1,8 @@
+# -*- coding:utf-8 -*-
+"""
+@Des: 中间件
+"""
+
 import time
 from starlette.datastructures import MutableHeaders
 from starlette.types import ASGIApp, Receive, Scope, Send, Message
@@ -5,7 +10,7 @@ from fastapi import Request
 from core.Utils import random_str
 
 
-class Middleware:
+class BaseMiddleware:
     """
     Middleware
     """
@@ -17,7 +22,7 @@ class Middleware:
         self.app = app
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        if scope["type"] not in ("http", "websocket"):  # pragma: no cover
+        if scope["type"] != "http":  # 非http协议
             await self.app(scope, receive, send)
             return
         start_time = time.time()
@@ -31,5 +36,4 @@ class Middleware:
                 headers = MutableHeaders(scope=message)
                 headers.append("X-Process-Time", str(process_time))
             await send(message)
-
         await self.app(scope, receive, send_wrapper)

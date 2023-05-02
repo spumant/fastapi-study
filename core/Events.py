@@ -1,3 +1,8 @@
+# -*- coding:utf-8 -*-
+"""
+@Des: fastapi事件监听
+"""
+
 from typing import Callable
 from fastapi import FastAPI
 from database.mysql import register_mysql
@@ -11,16 +16,15 @@ def startup(app: FastAPI) -> Callable:
     :param app: FastAPI
     :return: start_app
     """
-
     async def app_start() -> None:
+        # APP启动完成后触发
+        print("fastapi已启动")
         # 注册数据库
         await register_mysql(app)
         # 注入缓存到app state
         app.state.cache = await sys_cache()
-        # APP启动完成后触发
-        print("启动完毕")
-        pass
 
+        pass
     return app_start
 
 
@@ -30,7 +34,6 @@ def stopping(app: FastAPI) -> Callable:
     :param app: FastAPI
     :return: stop_app
     """
-
     async def stop_app() -> None:
         # APP停止时触发
         print("fastapi已停止")

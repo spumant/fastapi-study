@@ -1,5 +1,6 @@
+# -*- coding:utf-8 -*-
 """
-返回常用封装类型
+@Des: 常用返回类型封装
 """
 from typing import List
 
